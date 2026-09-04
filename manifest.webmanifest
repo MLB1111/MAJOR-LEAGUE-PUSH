@@ -1,0 +1,9 @@
+{
+  "name": "Major League",
+  "short_name": "Major League",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "icons": []
+}
