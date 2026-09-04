@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
+  <link rel="manifest" href="manifest.webmanifest">
+  <title>Major League — Join the Elite</title>
+
+  <!-- OneSignal SDK -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      /*
+        AFTER creating your OneSignal app:
+        replace 879ccb0b-e136-4e8d-a833-d89b897ca2d4 below with your real App ID.
+      */
+      await OneSignal.init({
+        appId: "879ccb0b-e136-4e8d-a833-d89b897ca2d4",
+        notifyButton: { enable: false }
+      });
+
+      const button = document.getElementById("notifyBtn");
+      button.addEventListener("click", async () => {
+        try {
+          await OneSignal.Notifications.requestPermission();
+        } catch (e) {
+          console.error(e);
+        }
+      });
+    });
+  </script>
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin:0; min-height:100%; background:#050505; color:#fff; font-family:Arial,Helvetica,sans-serif; }
+    body {
+      display:flex; align-items:center; justify-content:center;
+      padding:28px 18px;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(70,170,255,.12), transparent 34%),
+        radial-gradient(circle at 20% 90%, rgba(255,255,255,.05), transparent 30%),
+        #050505;
+    }
+    .wrap { width:min(620px,100%); text-align:center; }
+    .card {
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:28px; padding:34px 24px 28px;
+      background:rgba(12,12,12,.88);
+      box-shadow:0 20px 80px rgba(0,0,0,.55);
+      backdrop-filter:blur(12px);
+    }
+    .logo {
+      width:min(520px,92%); height:auto; display:block; margin:0 auto 28px;
+      filter:brightness(0) invert(1);
+    }
+    .eyebrow { letter-spacing:.22em; font-size:11px; font-weight:800; opacity:.62; margin-bottom:12px; }
+    h1 { font-size:clamp(30px,8vw,52px); line-height:1; margin:0 0 14px; text-transform:uppercase; letter-spacing:-.04em; }
+    p { color:#c9c9c9; line-height:1.55; margin:0 auto 24px; max-width:470px; }
+    button {
+      width:100%; border:0; border-radius:14px; padding:17px 20px;
+      font-size:16px; font-weight:900; letter-spacing:.05em;
+      text-transform:uppercase; cursor:pointer; background:#fff; color:#050505;
+      transition:transform .15s ease, opacity .15s ease;
+    }
+    button:active { transform:scale(.98); }
+    .small { font-size:12px; color:#777; margin-top:17px; }
+    .small a { color:#aaa; }
+    .steps { margin:26px 0 0; padding:18px; text-align:left; border-radius:16px; background:#101010; }
+    .steps strong { display:block; margin-bottom:8px; }
+    .steps ol { margin:0; padding-left:20px; color:#aaa; line-height:1.65; font-size:13px; }
+    .status { margin-top:14px; font-size:13px; color:#8f8f8f; min-height:18px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <img class="logo" src="major-league-logo.png" alt="Major League">
+      <div class="eyebrow">MAJOR LEAGUE LIFESTYLE</div>
+      <h1>Join the Elite</h1>
+      <p>Get new drops, exclusive announcements, photos and important updates directly on your device.</p>
+
+      <button id="notifyBtn">Enable Notifications</button>
+      <div class="status">Your subscription is private — other subscribers are not shown to you.</div>
+
+      <div class="steps">
+        <strong>iPhone / iPad</strong>
+        <ol>
+          <li>Open this site in Safari.</li>
+          <li>Tap Share → Add to Home Screen.</li>
+          <li>Open the new Home Screen icon.</li>
+          <li>Tap “Enable Notifications” and allow notifications.</li>
+        </ol>
+      </div>
+
+      <div class="small">By subscribing, you agree to receive Major League notifications. You can disable notifications at any time in your device/browser settings.</div>
+    </section>
+  </main>
+</body>
+</html>
