@@ -3,166 +3,138 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#050505">
+
+  <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
   <link rel="manifest" href="manifest.webmanifest">
-  <title>Major League — Join the Elite</title>
+
+  <title>Major League</title>
 
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
 
     OneSignalDeferred.push(async function(OneSignal) {
+
       const button = document.getElementById("notifyBtn");
-      const status = document.getElementById("status");
 
       try {
+
         await OneSignal.init({
           appId: "879ccb0b-e136-4e8d-a833-d89b897ca2d4"
         });
 
         button.disabled = false;
-        status.textContent = "Ready — tap Enable Notifications.";
 
         button.addEventListener("click", async function() {
+
           try {
-            status.textContent = "Requesting notification permission…";
             await OneSignal.Notifications.requestPermission();
-            status.textContent = "Notifications enabled.";
           } catch (error) {
             console.error(error);
-            status.textContent = "Notifications could not be enabled. Please try again.";
           }
+
         });
 
-        if (OneSignal.Notifications.permission) {
-          status.textContent = "Notifications are enabled.";
-        }
       } catch (error) {
         console.error("OneSignal initialization error:", error);
-        status.textContent = "Notification setup is unavailable. Please refresh the page.";
       }
+
     });
   </script>
 
   <style>
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      min-height: 100%;
-      background: #050505;
-      color: #fff;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+
+    html,
     body {
-      display: flex;
-      justify-content: center;
-      padding: 28px 18px;
-    }
-    .wrap { width: min(620px, 100%); text-align: center; }
-    .card {
-      border: 1px solid rgba(255,255,255,.14);
-      border-radius: 28px;
-      padding: 34px 24px 28px;
-      background: #0c0c0c;
-      box-shadow: 0 20px 80px rgba(0,0,0,.55);
-    }
-    .logo {
-      width: min(520px, 92%);
-      height: auto;
-      display: block;
-      margin: 0 auto 28px;
-      filter: brightness(0) invert(1);
-    }
-    .eyebrow {
-      letter-spacing: .22em;
-      font-size: 11px;
-      font-weight: 800;
-      opacity: .62;
-      margin-bottom: 12px;
-    }
-    h1 {
-      font-size: clamp(30px, 8vw, 52px);
-      line-height: 1;
-      margin: 0 0 14px;
-      text-transform: uppercase;
-      letter-spacing: -.04em;
-    }
-    p {
-      color: #c9c9c9;
-      line-height: 1.55;
-      margin: 0 auto 24px;
-      max-width: 470px;
-    }
-    button {
-      width: 100%;
-      border: 0;
-      border-radius: 14px;
-      padding: 17px 20px;
-      font-size: 16px;
-      font-weight: 900;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      cursor: pointer;
-      background: #fff;
-      color: #050505;
-    }
-    button:disabled { opacity: .55; cursor: wait; }
-    .status {
-      margin-top: 14px;
-      font-size: 13px;
-      color: #999;
-      min-height: 18px;
-    }
-    .small {
-      font-size: 12px;
-      color: #777;
-      margin-top: 17px;
-    }
-    .steps {
-      margin-top: 26px;
-      padding: 18px;
-      text-align: left;
-      border-radius: 16px;
-      background: #101010;
-    }
-    .steps strong { display: block; margin-bottom: 8px; }
-    .steps ol {
       margin: 0;
-      padding-left: 20px;
-      color: #aaa;
-      line-height: 1.65;
-      font-size: 13px;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: #000;
     }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+    }
+
+    .page-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0;
+      padding: 0;
+    }
+
+    /*
+      Invisible functional button positioned over
+      the ENABLE NOTIFICATIONS button in the image.
+    */
+
+    #notifyBtn {
+      position: absolute;
+
+      left: 14.8%;
+      top: 45.8%;
+
+      width: 70.5%;
+      height: 6%;
+
+      padding: 0;
+      margin: 0;
+
+      border: 0;
+      border-radius: 999px;
+
+      background: transparent;
+      color: transparent;
+
+      opacity: 0;
+
+      cursor: pointer;
+      z-index: 10;
+
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #notifyBtn:disabled {
+      cursor: default;
+    }
+
   </style>
 </head>
 
 <body>
-  <main class="wrap">
-    <section class="card">
-      <img class="logo" src="major-league-logo.png" alt="Major League">
-      <div class="eyebrow">MAJOR LEAGUE LIFESTYLE</div>
-      <h1>Join the Elite</h1>
-      <p>Get new drops, exclusive announcements, photos and important updates directly on your device.</p>
 
-      <button id="notifyBtn" disabled>Enable Notifications</button>
-      <div id="status" class="status">Preparing notifications…</div>
+  <main class="page">
 
-      <div class="small">
-        Your subscription is private — other subscribers are not shown to you.
-      </div>
+    <!-- EXACT IMAGE — NO MODIFICATIONS -->
+    <img
+      class="page-image"
+      src="major-league-webpage.jpeg"
+      alt="Major League"
+      draggable="false"
+    >
 
-      <div class="steps">
-        <strong>iPhone / iPad</strong>
-        <ol>
-          <li>Open this site in Safari.</li>
-          <li>Tap Share → Add to Home Screen.</li>
-          <li>Open the new Home Screen icon.</li>
-          <li>Tap “Enable Notifications” and allow notifications.</li>
-        </ol>
-      </div>
-    </section>
+    <!-- REAL FUNCTIONAL ONESIGNAL BUTTON -->
+    <button
+      id="notifyBtn"
+      type="button"
+      aria-label="Enable Notifications"
+      disabled>
+    </button>
+
   </main>
+
 </body>
 </html>
