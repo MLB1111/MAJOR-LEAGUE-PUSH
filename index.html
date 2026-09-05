@@ -19,7 +19,8 @@
 
     OneSignalDeferred.push(async function(OneSignal) {
 
-      const button = document.getElementById("notifyBtn");
+      const notifyBtn = document.getElementById("notifyBtn");
+      const websiteBtn = document.getElementById("websiteBtn");
 
       try {
 
@@ -27,9 +28,19 @@
           appId: "879ccb0b-e136-4e8d-a833-d89b897ca2d4"
         });
 
-        button.disabled = false;
+        notifyBtn.disabled = false;
 
-        button.addEventListener("click", async function() {
+        async function checkSubscription() {
+          try {
+            if (OneSignal.User.PushSubscription.optedIn) {
+              websiteBtn.style.display = "block";
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        }
+
+        notifyBtn.addEventListener("click", async function() {
 
           try {
             await OneSignal.Notifications.requestPermission();
@@ -37,13 +48,21 @@
             console.error(error);
           }
 
+          setTimeout(checkSubscription, 1000);
+
         });
+
+        checkSubscription();
 
       } catch (error) {
         console.error("OneSignal initialization error:", error);
       }
 
     });
+
+    function openWebsite() {
+      window.location.href = "https://justpaste.it/elqpy";
+    }
   </script>
 
   <style>
@@ -64,7 +83,7 @@
     .page {
       position: relative;
       width: 100%;
-      max-width: 1024px;
+      max-width: 710px;
       margin: 0 auto;
     }
 
@@ -76,10 +95,7 @@
       padding: 0;
     }
 
-    /*
-      Invisible functional button positioned over
-      the ENABLE NOTIFICATIONS button in the image.
-    */
+    /* Invisible button over ENABLE NOTIFICATIONS */
 
     #notifyBtn {
       position: absolute;
@@ -97,8 +113,6 @@
       border-radius: 999px;
 
       background: transparent;
-      color: transparent;
-
       opacity: 0;
 
       cursor: pointer;
@@ -111,14 +125,44 @@
       cursor: default;
     }
 
+    /* Website button shown after subscription */
+
+    #websiteBtn {
+      display: none;
+
+      position: absolute;
+
+      left: 14.8%;
+      top: 53.5%;
+
+      width: 70.5%;
+      height: 6%;
+
+      border: 2px solid #fff;
+      border-radius: 999px;
+
+      background: #000;
+      color: #fff;
+
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: 1px;
+
+      z-index: 20;
+      cursor: pointer;
+
+      -webkit-tap-highlight-color: transparent;
+    }
+
   </style>
+
 </head>
 
 <body>
 
   <main class="page">
 
-    <!-- EXACT IMAGE — NO MODIFICATIONS -->
     <img
       class="page-image"
       src="major-league-webpage.jpeg"
@@ -126,12 +170,18 @@
       draggable="false"
     >
 
-    <!-- REAL FUNCTIONAL ONESIGNAL BUTTON -->
     <button
       id="notifyBtn"
       type="button"
       aria-label="Enable Notifications"
       disabled>
+    </button>
+
+    <button
+      id="websiteBtn"
+      type="button"
+      onclick="openWebsite()">
+      VISIT WEBSITE
     </button>
 
   </main>
