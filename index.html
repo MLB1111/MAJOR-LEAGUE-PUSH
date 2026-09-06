@@ -107,28 +107,27 @@
       -webkit-user-drag: none;
     }
 
-    /* Visible MENU button */
+    /*
+      Invisible clickable area over the MENU
+      already contained inside the artwork.
+    */
 
     #menuBtn {
       position: absolute;
+
       right: 5.5%;
       top: 4%;
+
       width: 24%;
       height: 6.5%;
 
       padding: 0;
       margin: 0;
 
-      border: 2px solid #fff;
-      border-radius: 999px;
+      border: 0;
+      background: transparent;
 
-      background: rgba(0, 0, 0, 0.35);
-      color: #fff;
-
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 2px;
+      opacity: 0;
 
       z-index: 20;
       cursor: pointer;
@@ -136,18 +135,17 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    #menuBtn::before {
-      content: "☰";
-      margin-right: 8px;
-      font-size: 14px;
-    }
-
-    /* Invisible button over ENABLE NOTIFICATIONS */
+    /*
+      Invisible clickable area over
+      ENABLE NOTIFICATIONS.
+    */
 
     #notifyBtn {
       position: absolute;
+
       left: 13.5%;
       top: 43.8%;
+
       width: 73%;
       height: 6.5%;
 
@@ -158,6 +156,7 @@
       border-radius: 999px;
 
       background: transparent;
+
       opacity: 0;
 
       cursor: pointer;
@@ -170,14 +169,19 @@
       cursor: default;
     }
 
-    /* Invisible button over VISIT WEBSITE */
+    /*
+      Invisible clickable area over
+      VISIT WEBSITE.
+    */
 
     #websiteBtn {
       display: none;
 
       position: absolute;
+
       left: 13.5%;
       top: 49.3%;
+
       width: 73%;
       height: 6.5%;
 
@@ -188,6 +192,7 @@
       border-radius: 999px;
 
       background: transparent;
+
       opacity: 0;
 
       z-index: 20;
@@ -196,12 +201,15 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* MENU DROPDOWN */
+    /*
+      ANNOUNCEMENTS DROPDOWN
+    */
 
     #menuPanel {
       display: none;
 
       position: absolute;
+
       right: 5.5%;
       top: 11%;
 
@@ -209,6 +217,7 @@
       max-width: 280px;
 
       box-sizing: border-box;
+
       padding: 10px;
 
       background: rgba(0, 0, 0, 0.96);
@@ -229,10 +238,13 @@
       padding: 16px 14px;
 
       color: #fff;
+
       text-decoration: none;
 
       font-family: Arial, sans-serif;
+
       font-size: 16px;
+
       font-weight: 800;
 
       letter-spacing: 1.5px;
@@ -246,6 +258,8 @@
 
   <main class="page">
 
+    <!-- Full-screen Major League artwork -->
+
     <img
       class="page-image"
       src="major-league-webpage-fullscreen.png"
@@ -253,10 +267,15 @@
       draggable="false"
     >
 
+    <!-- Invisible MENU click area -->
+
     <button
       id="menuBtn"
       type="button"
-      aria-label="Open menu">MENU</button>
+      aria-label="Open menu">
+    </button>
+
+    <!-- Invisible notification click area -->
 
     <button
       id="notifyBtn"
@@ -265,6 +284,8 @@
       disabled>
     </button>
 
+    <!-- Invisible website click area -->
+
     <button
       id="websiteBtn"
       type="button"
@@ -272,8 +293,16 @@
       onclick="openWebsite()">
     </button>
 
-    <nav id="menuPanel" aria-label="Main menu">
-      <a href="announcements.html">ANNOUNCEMENTS</a>
+    <!-- Dropdown menu -->
+
+    <nav
+      id="menuPanel"
+      aria-label="Main menu">
+
+      <a href="announcements.html">
+        ANNOUNCEMENTS
+      </a>
+
     </nav>
 
   </main>
